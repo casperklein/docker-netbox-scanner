@@ -2,12 +2,12 @@
 
 ## Build (optional)
 
-    ./build.sh
+    make
  
-## Configure
+## Setup
  
-Change *address*, *token* and *networks* in ``.netbox-scanner.conf``
+Configure *address*, *token* and *networks* in ``.netbox-scanner.conf``.
 
-## Run
+## Start scan
 
-    ./run.sh
+    make scan

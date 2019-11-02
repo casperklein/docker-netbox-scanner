@@ -10,6 +10,5 @@ TAG="$USER/$NAME:$VERSION"
 DIR=${0%/*}
 cd "$DIR"
 
-echo "Building: $NAME $VERSION"
-echo
-docker build -t "$TAG" .
+echo "Starting Netbox-Scanner.."
+docker run --rm -it -v "$(pwd)"/.netbox-scanner.conf:/root/.netbox-scanner.conf:ro $TAG
