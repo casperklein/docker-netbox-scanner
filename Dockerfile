@@ -1,4 +1,4 @@
-FROM    debian:10-slim as build
+FROM	debian:10-slim as build
 
 ENV	USER="casperklein"
 ENV	NAME="netbox-scanner"
@@ -8,7 +8,7 @@ ENV	PACKAGES="python3 python3-pip nmap"
 ENV	PACKAGES="python3-pip"
 
 # Install packages
-RUN     apt-get update \
+RUN	apt-get update \
 &&	apt-get -y install $PACKAGES \
 &&	rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +17,7 @@ COPY	rootfs /
 
 # install netbox-scanner
 ADD	https://github.com/forkd/netbox-scanner/archive/master.tar.gz /
-WORKDIR /netbox-scanner
+WORKDIR	/netbox-scanner
 RUN	tar xzvf /master.tar.gz
 WORKDIR	/netbox-scanner/netbox-scanner-master
 RUN	pip3 install -r requirements.txt
