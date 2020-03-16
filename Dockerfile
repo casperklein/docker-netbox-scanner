@@ -2,7 +2,7 @@ FROM	debian:10-slim as build
 
 ENV	USER="casperklein"
 ENV	NAME="netbox-scanner"
-ENV	VERSION="latest"
+ENV	VERSION="0.1"
 
 ENV	PACKAGES="python3 python3-pip nmap"
 ENV	PACKAGES="python3-pip"
