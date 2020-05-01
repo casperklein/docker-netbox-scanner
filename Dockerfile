@@ -5,7 +5,6 @@ ENV	NAME="netbox-scanner"
 ENV	VERSION="0.1"
 
 ENV	PACKAGES="python3 python3-pip nmap"
-ENV	PACKAGES="python3-pip"
 
 # Install packages
 RUN	apt-get update \
