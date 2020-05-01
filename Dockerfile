@@ -22,9 +22,7 @@ WORKDIR	/netbox-scanner/netbox-scanner-master
 RUN	pip3 install -r requirements.txt
 
 # Cleanup
-RUN	apt-get -y purge $PACKAGES_CLEAN \
-&&	apt -y autoremove \
-&&	rm -rf /var/lib/apt/lists/*
+RUN	find /usr/ -name '*.pyc' -delete
 
 # Build final image
 FROM	scratch
