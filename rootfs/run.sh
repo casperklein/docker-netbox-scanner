@@ -7,4 +7,4 @@ echo 'a9ebfa600ece03fb0005080c3b1184dfe52cea87  /root/.netbox-scanner.conf' | sh
 
 echo 'Netbox-scanner running..'
 
-exec python3 /netbox-scanner/netbox-scanner-438016caea3e975ce2cae34c443d661ee7b66b20/netbox-scanner/nbscanner
+exec python3 /netbox-scanner/netbox-scanner/nbscanner
