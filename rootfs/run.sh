@@ -1,10 +1,19 @@
 #!/bin/bash
 
-echo 'a9ebfa600ece03fb0005080c3b1184dfe52cea87  /root/.netbox-scanner.conf' | sha1sum -c &> /dev/null && {
-	echo -e "Error: You have to configure at least ADDRESS, TOKEN and NETWORKS in '.netbox-scanner.conf'.\n" >&2
+set -ueo pipefail
+
+if [ ! -s /netbox-scanner/networks.txt ]; then
+	echo "Error: 'networks.txt' is empty."
+	echo
 	exit 1
-}
+fi >&2
 
-echo 'Netbox-scanner running..'
+echo '4de64ad74607f128bdb5873497a9d85d27e52c0a96dc994016488d050a55dd6c  /root/.netbox-scanner.conf' | sha256sum -c &> /dev/null && {
+	echo "Error: You have to configure at least ADDRESS and TOKEN in 'netbox-scanner.conf'."
+	echo
+	exit 1
+} >&2
 
-exec python3 /netbox-scanner/netbox-scanner/nbscanner
+cd /netbox-scanner
+
+./nmap-scan.sh

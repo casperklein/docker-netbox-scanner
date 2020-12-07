@@ -6,13 +6,13 @@ NAME := $(shell grep -P 'ENV\s+NAME=".+?"' Dockerfile | cut -d'"' -f2)
 VERSION := $(shell grep -P 'ENV\s+VERSION=".+?"' Dockerfile | cut -d'"' -f2)
 
 build:
-	./build.sh
+	@./build.sh
 
 clean:
 	docker rmi $(USER)/$(NAME):$(VERSION)
 
 scan:
-	./scan.sh
+	@./scan.sh
 
 push:
 	docker push $(USER)/$(NAME):$(VERSION)
