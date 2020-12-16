@@ -18,4 +18,9 @@ Docker version of [netbox-scanner](https://github.com/lopes/netbox-scanner). Sca
 
 ## Start scan
 
-    make scan
+    # use default DNS server
+    ./scan.sh
+
+    # use custom DNS server
+    # usefull if the host has a public DNS server configured and reverse DNS is not working for scanned hosts on the local network
+    ./scan.sh --dns 192.168.0.1
