@@ -1,0 +1,6 @@
+{
+  "user": "casperklein",
+  "name": "netbox-scanner",
+  "image": "casperklein/netbox-scanner",
+  "version": "2.0.0"
+}
