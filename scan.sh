@@ -2,10 +2,7 @@
 
 set -ueo pipefail
 
-USER=$(grep -P 'ENV\s+USER=".+?"' Dockerfile | cut -d'"' -f2)
-NAME=$(grep -P 'ENV\s+NAME=".+?"' Dockerfile | cut -d'"' -f2)
-VERSION=$(grep -P 'ENV\s+VERSION=".+?"' Dockerfile | cut -d'"' -f2)
-TAG="$USER/$NAME:$VERSION"
+TAG="casperklein/netbox-scanner:latest"
 
 DIR=${0%/*}
 cd "$DIR"
