@@ -22,7 +22,7 @@ ADD	$GIT_ARCHIVE /
 RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz
 
 # Install dependencies
-RUN	pip3 install -r requirements.txt
+RUN	pip3 install --no-cache-dir -r requirements.txt
 
 # Cleanup
 RUN	find /usr/ -name '*.pyc' -delete
