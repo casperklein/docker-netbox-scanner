@@ -1,4 +1,4 @@
-name: "Build & Publish"
+name: "Build & Publish amd64"
 
 on:
   workflow_dispatch:
@@ -16,9 +16,12 @@ jobs:
         name: Set variables
         run: |
           IMAGE=$(jq -er '.image' < config.json)
+          VERSION=$(jq -er '.version' < config.json)
           TAG=$(jq -er '"\(.image):\(.version)"' < config.json)
-          echo "IMAGE=$IMAGE" >> $GITHUB_ENV # ${{ env.VERSION }}
-          echo "TAG=$TAG" >> $GITHUB_ENV # ${{ env.TAG }}
+
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV      # ${{ env.IMAGE }}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV  # ${{ env.VERSION }}
+          echo "TAG=$TAG" >> $GITHUB_ENV          # ${{ env.TAG }}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -50,6 +53,8 @@ jobs:
           context: .
           platforms: linux/amd64
           push: true
+          build-args: |
+            VERSION=${{ env.VERSION }}
           tags: |
             ${{ env.TAG }}
             ${{ env.IMAGE }}:latest

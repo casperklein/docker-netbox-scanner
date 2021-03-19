@@ -33,6 +33,9 @@ COPY	rootfs /
 # Build final image
 FROM	scratch
 
+ARG	VERSION
+ENV	Version=$VERSION
+
 CMD	["/run.sh"]
 
 COPY	--from=build / /
