@@ -19,7 +19,8 @@ RUN	apt-get update \
 # Download source
 WORKDIR	/$GIT_REPO
 ADD	$GIT_ARCHIVE /
-RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz
+RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz \
+&&	mkdir logs
 
 # Install dependencies
 RUN	pip3 install --no-cache-dir -r requirements.txt
