@@ -10,8 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
+        name: Get latest release tag
+        id: latestrelease
+        run: |
+          RELEASE_TAG=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest" | jq -r '.tag_name')
+          echo "::set-output name=tag::$RELEASE_TAG"
+          echo "Latest release: $RELEASE_TAG"
+      -
         name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.latestrelease.outputs.tag }}
       -
         name: Set variables
         run: |
