@@ -2,7 +2,7 @@ FROM	debian:10-slim as build
 
 ENV	PACKAGES="python3 python3-pip nmap"
 
-SHELL   ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
 ENV	GIT_USER="lopes"
 ENV	GIT_REPO="netbox-scanner"
