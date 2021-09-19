@@ -1,4 +1,4 @@
-FROM	debian:10-slim as build
+FROM	debian:11-slim as build
 
 ENV	PACKAGES="python3 python3-pip nmap"
 
