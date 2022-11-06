@@ -14,7 +14,7 @@ jobs:
         id: latestrelease
         run: |
           RELEASE_TAG=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest" | jq -r '.tag_name')
-          echo "::set-output name=tag::$RELEASE_TAG"
+          echo "tag=$RELEASE_TAG" >> $GITHUB_OUTPUT
           echo "Latest release: $RELEASE_TAG"
       -
         name: Checkout
