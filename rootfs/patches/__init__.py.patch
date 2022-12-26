@@ -1,0 +1,13 @@
+--- __init__.py.old	2020-11-25 18:19:06.000000000 +0100
++++ __init__.py	2022-12-25 23:45:59.198282982 +0100
+@@ -65,8 +65,8 @@
+             self.netbox.ipam.ip_addresses.create(
+                 address=host[0],
+                 tags=[{"name": self.tag}],
+-                # dns_name=host[1],
+-                description=host[1]
++                dns_name=host[1],
++                description=host[2]
+             )
+             logging.info(f'created: {host[0]}/32 "{host[1]}"')
+             self.stats['created'] += 1

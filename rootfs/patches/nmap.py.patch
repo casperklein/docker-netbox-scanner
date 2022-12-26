@@ -1,0 +1,16 @@
+--- nmap.py.old	2020-11-25 18:19:06.000000000 +0100
++++ nmap.py	2022-12-25 23:44:45.336169470 +0100
+@@ -21,10 +21,12 @@
+                 try:
+                     self.hosts.append((
+                         host.find('address').attrib['addr'],
+-                        host.find('hostnames').find('hostname').attrib['name']
++                        host.find('hostnames').find('hostname').attrib['name'],
++                        self.unknown
+                     ))
+                 except AttributeError:
+                     self.hosts.append((
+                         host.find('address').attrib['addr'],
++                        "",
+                         self.unknown
+                     ))
