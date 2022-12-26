@@ -1,6 +1,7 @@
 FROM	debian:11-slim as build
 
-ENV	PACKAGES="python3 python3-pip nmap"
+ENV	PACKAGES="python3 python3-pip nmap patch"
+ENV	PACKAGES_CLEAN="patch"
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -22,14 +23,21 @@ ADD	$GIT_ARCHIVE /
 RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz \
 &&	mkdir logs
 
+# Copy root filesystem
+COPY	rootfs /
+
+# DNS patch
+RUN	patch -i /patches/__init__.py.patch	/netbox-scanner/nbs/__init__.py
+RUN	patch -i /patches/nmap.py.patch		/netbox-scanner/nbs/nmap.py
+
 # Install dependencies
 RUN	pip3 install --no-cache-dir -r requirements.txt
 
 # Cleanup
 RUN	find /usr/ -name '*.pyc' -delete
-
-# Copy root filesystem
-COPY	rootfs /
+RUN	rm -rf /patches
+RUN	apt-get -y purge $PACKAGES_CLEAN \
+&&	apt-get -y autoremove
 
 # Build final image
 FROM	scratch
