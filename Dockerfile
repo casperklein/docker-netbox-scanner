@@ -42,8 +42,12 @@ RUN	apt-get -y purge $PACKAGES_CLEAN \
 # Build final image
 FROM	scratch
 
-ARG	VERSION
-ENV	Version=$VERSION
+ARG	VERSION="unknown"
+
+LABEL	org.opencontainers.image.description="Dockerized version of netbox-scanner. Scan networks and add them to Netbox."
+LABEL	org.opencontainers.image.source="https://github.com/casperklein/docker-netbox-scanner/"
+LABEL	org.opencontainers.image.title="docker-netbox-scanner"
+LABEL	org.opencontainers.image.version="$VERSION"
 
 CMD	["/run.sh"]
 

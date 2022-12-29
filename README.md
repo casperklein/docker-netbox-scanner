@@ -1,6 +1,6 @@
 # docker-netbox-scanner
 
-Docker version of [netbox-scanner](https://github.com/lopes/netbox-scanner). Scan networks and add them to Netbox.
+Dockerized version of [netbox-scanner](https://github.com/lopes/netbox-scanner). Scan networks and add them to Netbox.
 
 ## Build (optional)
 
