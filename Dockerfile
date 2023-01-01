@@ -1,17 +1,17 @@
 FROM	debian:11-slim as build
 
-ENV	PACKAGES="python3 python3-pip nmap patch"
-ENV	PACKAGES_CLEAN="patch"
+ARG	PACKAGES="python3 python3-pip nmap patch"
+ARG	PACKAGES_CLEAN="patch"
 
 SHELL	["/bin/bash", "-o", "pipefail", "-c"]
 
-ENV	GIT_USER="lopes"
-ENV	GIT_REPO="netbox-scanner"
-ENV	GIT_COMMIT="af65c252776127d2ab3505862fca7670e299c45c"
-ENV	GIT_ARCHIVE="https://github.com/$GIT_USER/$GIT_REPO/archive/$GIT_COMMIT.tar.gz"
+ARG	GIT_USER="lopes"
+ARG	GIT_REPO="netbox-scanner"
+ARG	GIT_COMMIT="af65c252776127d2ab3505862fca7670e299c45c"
+ARG	GIT_ARCHIVE="https://github.com/$GIT_USER/$GIT_REPO/archive/$GIT_COMMIT.tar.gz"
 
 # Install packages
-ENV	DEBIAN_FRONTEND=noninteractive
+ARG	DEBIAN_FRONTEND=noninteractive
 RUN	apt-get update \
 &&	apt-get -y upgrade \
 &&	apt-get -y install $PACKAGES \
