@@ -1,4 +1,4 @@
-FROM	debian:12-slim as netbox
+FROM	debian:12-slim as netbox-scanner
 
 ARG	GIT_USER="lopes"
 ARG	GIT_REPO="netbox-scanner"
@@ -33,22 +33,17 @@ ENV	PATH="$VIRTUAL_ENV/bin:$PATH"
 RUN	pip3 install --no-cache-dir -r requirements.txt
 
 # Build image
-FROM	debian:12-slim as build
+FROM	alpine:3 as build
 
-ARG	PACKAGES="nmap python3"
+# sha256sum --> coreutils
+ARG	PACKAGES="nmap python3 bash coreutils"
 
-SHELL	["/bin/bash", "-o", "pipefail", "-c"]
-
-# Install packages
-ARG	DEBIAN_FRONTEND=noninteractive
-RUN	apt-get update \
-&&	apt-get -y upgrade \
-&&	apt-get -y install $PACKAGES \
-&&	rm -rf /var/lib/apt/lists/*
+RUN	apk upgrade --no-cache \
+&&	apk add --no-cache $PACKAGES
 
 # Copy necessary files
 COPY	rootfs/run.sh /
-COPY	--from=netbox /netbox-scanner /netbox-scanner
+COPY	--from=netbox-scanner /netbox-scanner /netbox-scanner
 
 # Build final image
 FROM	scratch
