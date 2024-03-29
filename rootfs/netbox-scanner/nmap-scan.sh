@@ -33,10 +33,11 @@ mapfile -t NETWORKS < networks.txt
 for net in "${NETWORKS[@]}"; do
     echo "Scan network $net"
     NETNAME=$(echo $net | tr -s '/' '-')
-    # requires sudo
-    nmap "$net" -T4 -O -F --host-timeout 30s -oX nmap-"$NETNAME".xml
-    # does not require sudo
-    #nmap "$net" -T4 -sn --host-timeout 30s -oX nmap-"$NETNAME".xml
+    # -T<0-5>   Set timing template (higher is faster). The template names are paranoid (0), sneaky (1), polite (2), normal (3), aggressive (4), and insane (5).
+    # -sn       Ping Scan - disable port scan
+    # -PE       Use ICMP echo request queries
+    # nmap "$net" -T4 -sn -PE --host-timeout 30s -oX nmap-"$NETNAME".xml
+    nmap "$net" -sn -PE --host-timeout 30s -oX nmap-"$NETNAME".xml
 done
 echo
 
