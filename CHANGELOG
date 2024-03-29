@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.5.0
+
+- Increase Nmap scan speed by disabling host detection and port scans
+
 ## 2.4.1
 
 - Smaller image size
