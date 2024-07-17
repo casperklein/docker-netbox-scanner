@@ -13,6 +13,11 @@ make
 1. Goto `Others / Tags` and create a new tag: `nmap`.
 1. Goto `Profiles & Settings / API Tokens` and create a token, for use with netbox-scanner.
 
+## Setup Netbox 4.x
+
+1. Goto `Customization / Tags` and create a new tag: `nmap`.
+1. Goto `Authentication / API Tokens` and create a token, for use with netbox-scanner.
+
 ## Setup Netbox-Scanner
 
 1. Configure *address* and API *token* in `netbox-scanner.conf`.

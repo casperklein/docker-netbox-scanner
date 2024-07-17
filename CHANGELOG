@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.6.0
+
+- remove alpine build stage
+- fix build warnings
+
 ## 2.5.0
 
 - Increase Nmap scan speed by disabling host detection and port scans
