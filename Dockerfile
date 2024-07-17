@@ -1,4 +1,4 @@
-FROM	debian:12-slim as netbox-scanner
+FROM	debian:12-slim AS netbox-scanner
 
 ARG	GIT_USER="lopes"
 ARG	GIT_REPO="netbox-scanner"
@@ -20,9 +20,9 @@ RUN	patch -i /patches/__init__.py.patch	/netbox-scanner/nbs/__init__.py
 RUN	patch -i /patches/nmap.py.patch		/netbox-scanner/nbs/nmap.py
 
 # If this is set to a non-empty string, Python won’t try to write .pyc files on the import of source modules.
-ENV	PYTHONDONTWRITEBYTECODE 1
+ENV	PYTHONDONTWRITEBYTECODE=1
 # Force the stdout and stderr streams to be unbuffered. This option has no effect on the stdin stream.
-ENV	PYTHONUNBUFFERED 1
+ENV	PYTHONUNBUFFERED=1
 
 # create and use python virtual environment
 ENV	VIRTUAL_ENV=/netbox-scanner/venv
@@ -33,7 +33,7 @@ ENV	PATH="$VIRTUAL_ENV/bin:$PATH"
 RUN	pip3 install --no-cache-dir -r requirements.txt
 
 # Build image
-FROM	alpine:3 as build
+FROM	alpine:3 AS build
 
 # sha256sum --> coreutils
 ARG	PACKAGES="nmap python3 bash coreutils"
@@ -49,9 +49,9 @@ COPY	--from=netbox-scanner /netbox-scanner /netbox-scanner
 FROM	scratch
 
 # If this is set to a non-empty string, Python won’t try to write .pyc files on the import of source modules.
-ENV	PYTHONDONTWRITEBYTECODE 1
+ENV	PYTHONDONTWRITEBYTECODE=1
 # Force the stdout and stderr streams to be unbuffered. This option has no effect on the stdin stream.
-ENV	PYTHONUNBUFFERED 1
+ENV	PYTHONUNBUFFERED=1
 
 # use python virtual environment
 ENV	VIRTUAL_ENV=/netbox-scanner/venv
