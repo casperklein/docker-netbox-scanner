@@ -8,11 +8,6 @@ Dockerized version of [netbox-scanner](https://github.com/lopes/netbox-scanner).
 make
 ```
 
-## Setup Netbox 2.x
-
-1. Goto `Organization / Tags` and create a new tag: `nmap`.
-1. Goto `Profile / API Tokens` and create a token, for use with netbox-scanner.
-
 ## Setup Netbox 3.x
 
 1. Goto `Others / Tags` and create a new tag: `nmap`.

@@ -1,4 +1,4 @@
-FROM	debian:12-slim AS netbox-scanner
+FROM	debian:12-slim AS build
 
 ARG	GIT_USER="lopes"
 ARG	GIT_REPO="netbox-scanner"
@@ -12,10 +12,13 @@ RUN	tar --strip-component 1 -xzvf /$GIT_COMMIT.tar.gz && rm /$GIT_COMMIT.tar.gz 
 
 COPY	rootfs /
 
-# DNS patch
+ARG	PACKAGES="patch python3-venv nmap"
+
 RUN	apt-get update \
-&&	apt-get -y --no-install-recommends install patch python3-venv \
+&&	apt-get -y --no-install-recommends install $PACKAGES \
 &&	rm -rf /var/lib/apt/lists/*
+
+# DNS patch
 RUN	patch -i /patches/__init__.py.patch	/netbox-scanner/nbs/__init__.py
 RUN	patch -i /patches/nmap.py.patch		/netbox-scanner/nbs/nmap.py
 
@@ -32,18 +35,8 @@ ENV	PATH="$VIRTUAL_ENV/bin:$PATH"
 # Install dependencies
 RUN	pip3 install --no-cache-dir -r requirements.txt
 
-# Build image
-FROM	alpine:3 AS build
-
-# sha256sum --> coreutils
-ARG	PACKAGES="nmap python3 bash coreutils"
-
-RUN	apk upgrade --no-cache \
-&&	apk add --no-cache $PACKAGES
-
 # Copy necessary files
 COPY	rootfs/run.sh /
-COPY	--from=netbox-scanner /netbox-scanner /netbox-scanner
 
 # Build final image
 FROM	scratch
