@@ -24,7 +24,7 @@ RUN	patch -i /patches/nmap.py.patch		/netbox-scanner/nbs/nmap.py
 
 # If this is set to a non-empty string, Python won’t try to write .pyc files on the import of source modules.
 ENV	PYTHONDONTWRITEBYTECODE=1
-# Force the stdout and stderr streams to be unbuffered. This option has no effect on the stdin stream.
+# Show python output immediately, not buffered.
 ENV	PYTHONUNBUFFERED=1
 
 # create and use python virtual environment
